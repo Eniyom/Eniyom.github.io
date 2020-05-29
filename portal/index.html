@@ -35,6 +35,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.min.js"></script>
     <script>
+        window.onbeforeunload = function (e) {
+        e = e || window.event;
+
+     // For IE and Firefox prior to version 4
+    if (e) {
+        e.returnValue = ':)';
+    }
+
+    // For Safari
+    return ':)';
+};
         function jumpscare() {
         var jumpscare = document.getElementById("jumpscare");
         jumpscare.style.visibility="visible";
