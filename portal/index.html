@@ -12,11 +12,8 @@
   body {
     overflow-x: hidden;
   }
-  #jumpscare {position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; cursor: pointer; visibility: hidden;}
 </style>
 <body>
-    <img id="jumpscare" src="./g.gif"/>
-    <audio id="scream" src="./jumpscareAudio.mp3"></audio>
     <div class="highlight-clean">
         <div class="container">
             <div class="intro">
@@ -29,30 +26,11 @@
     <div class="container"><button class="btn btn-primary" id="tr" type="button">Türkçe</button><button class="btn btn-primary" id="m1" type="button">Mat1</button><button class="btn btn-primary" id="m2" type="button">Mat2</button><button class="btn btn-primary" id="k1" type="button">Kim1</button>
         <button
             class="btn btn-primary" id="k2" type="button">Kim2</button><button class="btn btn-primary" id="f1" type="button">Fiz1</button><button class="btn btn-primary" id="f2" type="button">Fiz2</button><button class="btn btn-primary" id="c" type="button">Coğrafya</button><button class="btn btn-primary"
-                id="tar" type="button">Tarih</button><button class="btn btn-primary" id="fel" type="button">Felsefe</button><button class="btn btn-primary" id="geo1." onclick="jumpscare();" type="button">Geo1</button><button class="btn btn-primary" id="geo2" type="button">Geo2</button>
-            <button class="btn btn-primary" id="biy1." onclick="jumpscare();" type="button">Biy1</button><button class="btn btn-primary" id="biy2" type="button">Biy2</button></div>
+                id="tar" type="button">Tarih</button><button class="btn btn-primary" id="fel" type="button">Felsefe</button><button class="btn btn-primary" id="geo1" type="button">Geo1</button><button class="btn btn-primary" id="geo2" type="button">Geo2</button>
+            <button class="btn btn-primary" id="biy1" type="button">Biy1</button><button class="btn btn-primary" id="biy2" type="button">Biy2</button></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.min.js"></script>
-    <script>
-        window.onbeforeunload = function (e) {
-        e = e || window.event;
-
-     // For IE and Firefox prior to version 4
-    if (e) {
-        e.returnValue = ':)';
-    }
-
-    // For Safari
-    return ':)';
-};
-        function jumpscare() {
-        var jumpscare = document.getElementById("jumpscare");
-        jumpscare.style.visibility="visible";
-        var audio = document.getElementById("scream");
-          audio.play();
-        }
-    </script>
 </body>
 
 </html>
