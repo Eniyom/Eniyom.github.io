@@ -1,1 +1,48 @@
-<h1>Hello World</h1>
+<html>
+<header>
+    <title>Okul Birincisi Sıralaması</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+    body{padding:0;margin:0;padding-bottom: 5vh;}
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.gray{
+    background-color: #D3D3D3;
+}
+</style>
+</header>
+
+<body>
+<h1 style="text-align: center">Okul Birincisi Kontenjanı Tıp Sıralama (Devlet)</h1>
+<table class="tg" style="undefined;table-layout: fixed; width: 80%; margin-left:auto; margin-right:auto;">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+  <tr>
+    <th class="tg-0lax">Sıralama</th>
+    <th class="tg-0lax gray">Şehir</th>
+    <th class="tg-0lax">Üniversite</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$.getJSON( "out.json", function( data ) {
+  for(let a = 0; a < Object.keys(data).length; a++){
+    console.log(Object.keys(data)[a].split(' ')[0] + "->" + data[Object.keys(data)[a]]['city'] + "->" + data[Object.keys(data)[a]]['name'])
+    $('.tg').append('<tr><td class="tg-0lax">'+Object.keys(data)[a].split(' ')[0]+'</td><td class="tg-0lax gray">'+data[Object.keys(data)[a]]['city']+'</td><td class="tg-0lax">'+data[Object.keys(data)[a]]['name']+'</td></tr>')
+  }
+});
+
+</script>
+</html>
