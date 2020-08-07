@@ -1,0 +1,74 @@
+<html>
+<header>
+    <title>Bilgisayar Mühendisliği Sıralama</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+    body{padding:0;margin:0;padding-bottom: 5vh;}
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.gray{
+    background-color: #D3D3D3;
+}
+</style>
+</header>
+
+<body>
+<h1 style="text-align: center">Bilgisayar Mühendisliği Sıralama 2019 (Devlet)</h1>
+<table class="tg" style="undefined;table-layout: fixed; width: 80%; margin-left:auto; margin-right:auto;">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+  <tr>
+    <th class="tg-0lax">Sıralama</th>
+    <th class="tg-0lax gray">Şehir</th>
+    <th class="tg-0lax">Üniversite</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+let min = null
+let max = null
+$.getJSON( "out.json", function( data ) {
+  for(let a = 0; a < Object.keys(data).length; a++){
+    //console.log(Object.keys(data)[a].split(' ')[0] + "->" + data[Object.keys(data)[a]]['city'] + "->" + data[Object.keys(data)[a]]['name'])
+    if(parseInt(Object.keys(data)[a].split(' ')[0]) > (160000)*(6/10)){
+    if(min == null){
+    min = parseInt(Object.keys(data)[a].split(' ')[0]) - (160000*(9/10))
+    }
+    let offset = (parseInt(Object.keys(data)[a].split(' ')[0]) - (160000*(9/10)));
+    if(offset < 0){
+    let offsetoppacity = (parseInt(Object.keys(data)[a].split(' ')[0]) - (160000*(9/10))) / min
+        $('.tg').append('<tr><td class="tg-0lax" style="background-color:rgba(255,0,0,'+offsetoppacity+')">'+Object.keys(data)[a].split(' ')[0]+'</td><td class="tg-0lax gray">'+data[Object.keys(data)[a]]['city']+'</td><td class="tg-0lax">'+data[Object.keys(data)[a]]['name']+'</td></tr>')
+    }else{
+    	if(max == null){
+    	    max = Object.keys(data)[Object.keys(data).length - 1].split(' ')[0]
+    	}
+    	/*if(parseInt(Object.keys(data)[a].split(' ')[0] >= (160000*(9/10) || parseInt(Object.keys(data)[a].split(' ')[0] <= (160000*(11/10)){
+    	    $('.tg').append('<tr><td class="tg-0lax">'+Object.keys(data)[a].split(' ')[0]+'</td><td class="tg-0lax gray">'+data[Object.keys(data)[a]]['city']+'</td><td class="tg-0lax">'+data[Object.keys(data)[a]]['name']+'</td></tr>')
+           }*/
+        if(parseInt(Object.keys(data)[a].split(' ')[0]) >= (160000*(9/10)) || parseInt(Object.keys(data)[a].split(' ')[0]) <= (160000*(10/10))){
+            if(parseInt(Object.keys(data)[a].split(' ')[0]) <= (160000*(10/10))){
+                $('.tg').append('<tr><td class="tg-0lax">'+Object.keys(data)[a].split(' ')[0]+'</td><td class="tg-0lax gray">'+data[Object.keys(data)[a]]['city']+'</td><td class="tg-0lax">'+data[Object.keys(data)[a]]['name']+'</td></tr>')
+            }else{
+            let offsetoppacity = (parseInt(Object.keys(data)[a].split(' ')[0])) / (max*2)
+            $('.tg').append('<tr><td class="tg-0lax" style="background-color:rgba(0,255,0,'+offsetoppacity+')">'+Object.keys(data)[a].split(' ')[0]+'</td><td class="tg-0lax gray">'+data[Object.keys(data)[a]]['city']+'</td><td class="tg-0lax">'+data[Object.keys(data)[a]]['name']+'</td></tr>')
+            }
+        }
+    }
+    }
+  }
+});
+
+</script>
+</html>
