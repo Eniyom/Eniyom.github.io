@@ -1,0 +1,25 @@
+body {
+  text-align: center;
+}
+
+.main {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 10vh;
+  margin-top: auto;
+  right: 0;
+  left: 0;
+}
+
+.main button {
+  height: 10vh;
+  width: 20vh;
+  display: inline;
+  margin-bottom: 2vh;
+}
+
+p {
+  margin-top: 20vh;
+}
+
