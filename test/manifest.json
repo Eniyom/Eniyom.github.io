@@ -5,4 +5,11 @@
     "display": "fullscreen",
     "orientation": "portrait",
     "lang": "Turkish"
+    "icons": [
+        {
+            "src": "assets/tip.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+]
 }
