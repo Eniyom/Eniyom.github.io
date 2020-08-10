@@ -8,6 +8,12 @@
     <title>Tıp</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ABC App">
+    <meta name="msapplication-TileImage" content="assets/tip.png">
+    <link rel="apple-touch-icon" href="assets/tip.png">
+    <meta name="msapplication-TileColor" content="#2F3BA2">
 </head>
 
 <body>
@@ -19,9 +25,18 @@
     <script src="assets/js/main.js"></script>
 </body>
 <script>
-import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-
-const el = document.createElement('pwa-update');
-document.body.appendChild(el);
+ if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+   navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+    console.log('Registered!');
+   }, function (err) {
+    console.log('ServiceWorker registration failed: ', err);
+   }).catch(function (err) {
+    console.log(err);
+   });
+  });
+ } else {
+  console.log('service worker is not supported');
+ }
 </script>
 </html>
