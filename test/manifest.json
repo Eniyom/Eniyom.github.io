@@ -14,7 +14,7 @@
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "/assets/tıp.png",
+            "src": "/assets/tip.png",
             "sizes": "512x512",
             "type": "image/png"
         }
