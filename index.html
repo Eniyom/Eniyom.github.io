@@ -56,7 +56,10 @@
         <div class="textarea-container">
             <textarea id="input" placeholder="Buraya metni yapıştırın..."></textarea>
         </div>
-        <button id="shortenButton">Kısalt</button>
+        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            <button id="shortenButton">Kısalt</button>
+            <button id="copyButton">Sonucu Kopyala</button>
+        </div>
         <div class="textarea-container">
             <textarea id="output" placeholder="Kısaltılmış sonuç burada görünecek..." readonly></textarea>
         </div>
@@ -110,7 +113,32 @@
 
         document.getElementById('output').value = outputLines.join('\n');
     });
+
+    // Copy output button functionality
+    document.getElementById('copyButton').addEventListener('click', function() {
+        const outputText = document.getElementById('output').value;
+        if (outputText.trim() === '') {
+            alert('Kopyalanacak sonuç yok!');
+            return;
+        }
+        
+        navigator.clipboard.writeText(outputText).then(function() {
+            // Temporarily change button text to show success
+            const button = document.getElementById('copyButton');
+            const originalText = button.textContent;
+            button.textContent = 'Kopyalandı!';
+            button.style.backgroundColor = '#28a745';
+            
+            setTimeout(function() {
+                button.textContent = originalText;
+                button.style.backgroundColor = '#007bff';
+            }, 1500);
+        }).catch(function(err) {
+            alert('Kopyalama başarısız: ' + err);
+        });
+    });
  </script>
 
 
 </html>
+
