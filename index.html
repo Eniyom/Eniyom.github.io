@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Sonuç Kısalt</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .textarea-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        textarea {
+            width: 400px;
+            height: 600px;
+            resize: vertical;
+            font-family: monospace;
+            font-size: 14px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button {
+            width: 120px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="textarea-container">
+            <textarea id="input" placeholder="Buraya metni yapıştırın..."></textarea>
+        </div>
+        <button id="shortenButton">Kısalt</button>
+        <div class="textarea-container">
+            <textarea id="output" placeholder="Kısaltılmış sonuç burada görünecek..." readonly></textarea>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    var trimmap = {
+        "Glomerüler Filtrasyon Hızı (CKD - EPI)": "GFR",
+        "CRP (türbidimetrik)": "CRP",
+        "Hemoglobin": "Hb",
+        "Hematokrit": "Hct",
+        "ALP (Alkalen Fosfataz)": "ALP",
+        "Total Bilirubin": "T.Bilirubin",
+        "Direkt Bilirubin": "D.Bilirubin",
+    }
+    document.getElementById('shortenButton').addEventListener('click', function() {
+        var inputText = document.getElementById('input').value;
+
+        // Replace trimmap keys with their values before splitting
+        for (let key in trimmap) {
+            inputText = inputText.replaceAll(key, trimmap[key]);
+        }
+
+        const arrayText = inputText.split('\n');
+        const processedLines = arrayText.map(line => {
+            if (line.trim() === '') return ''; // Skip empty lines
+            line = line.split(' -');
+            return line[0] + ": " + line[1].split(' ')[1]; 
+        }).filter(line => line !== ''); // Remove empty lines
+
+        // Combine into 2 columns with max 33 characters per line
+        const outputLines = [];
+        for (let i = 0; i < processedLines.length; i += 2) {
+            const first = processedLines[i];
+            const second = processedLines[i + 1];
+            
+            if (second && (first.length + second.length + 3) <= 33) {
+                // Combine two columns with spacing
+                const spacing = ' '.repeat(33 - first.length - second.length);
+                outputLines.push(first + spacing + second);
+            } else {
+                // Use only first column if second doesn't exist or combined length exceeds 33
+                outputLines.push(first);
+                if (second) {
+                    outputLines.push(second);
+                }
+            }
+        }
+
+        document.getElementById('output').value = outputLines.join('\n');
+    });
+ </script>
+
+
+</html>
