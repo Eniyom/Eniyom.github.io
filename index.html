@@ -117,6 +117,29 @@
     // Copy output button functionality
     document.getElementById('copyButton').addEventListener('click', function() {
         const outputText = document.getElementById('output').value;
+        
+        // If output is empty, trigger shorten first
+        if (outputText.trim() === '') {
+            const inputText = document.getElementById('input').value;
+            if (inputText.trim() === '') {
+                alert('Önce giriş alanına metin yapıştırın!');
+                return;
+            }
+            
+            // Trigger shorten function
+            document.getElementById('shortenButton').click();
+            
+            // Wait a moment for processing, then copy
+            setTimeout(function() {
+                copyToClipboard();
+            }, 100);
+        } else {
+            copyToClipboard();
+        }
+    });
+    
+    function copyToClipboard() {
+        const outputText = document.getElementById('output').value;
         if (outputText.trim() === '') {
             alert('Kopyalanacak sonuç yok!');
             return;
@@ -136,7 +159,7 @@
         }).catch(function(err) {
             alert('Kopyalama başarısız: ' + err);
         });
-    });
+    }
  </script>
 
 
