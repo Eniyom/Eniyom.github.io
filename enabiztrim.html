@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur -->
+<!-- Programmed by Zafer Akçalı, MD-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>E-nabız laboratuvar raporu kısaltıcısı</title>
+   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.0.0/papaparse.min.js"></script>	
+<script src="dictionary.txt"></script>
+</head>
+<body>
+	Kısaltılacak E-nabız laboratuvar sonuç metnini giriniz : <br />
+	<textarea rows = "25" cols = "100" name = "Uzun Yazı" id="text1"></textarea> <br /> 
+	<button onclick="trimFunction()">Kısalt</button>
+ 	<button onclick="clearFunction()">Sil</button><br /><br /> 
+    Kısaltılmış E-nabız laboratuvar sonuç metni : <br />
+	<textarea rows = "15" cols = "100" name = "Kısa Yazı" id="text2"></textarea> <br />
+	<button onclick="copyFunction()">Kopyala</button><br />
+<script>
+function trimFunction() {
+	parseFunction();
+	shortText = document.getElementById('text1').value;
+	
+	for (var i=0; i<myDict.length; i+=2) { // first item to last item
+		shortText=shortText.split(myDict[i]).join(myDict[i+1]);
+	}
+	document.getElementById('text2').value = shortText;
+}
+function copyFunction() {
+	document.getElementById('text2').select();
+	document.execCommand("copy");
+}
+function clearFunction() {
+	document.getElementById('text1').value="";
+}
+function parseFunction () {
+csvtext = document.getElementById('text1').value;
+longtext = "";
+var delimit = "\t"
+var nrows = 0;
+	results = Papa.parse(csvtext, {	//parse from csv text
+	header: false,
+	delimiter: delimit,  // read from text box
+	skipEmptyLines: true
+});
+nrows = results.data.length; // number of rows in csv file
+for (var i=0; i<nrows; i++) { //
+ measurable = results.data[i][2]
+ measurement = results.data[i][3]
+ if (measurement !== "") {
+ longtext = longtext + measurable + ":" + measurement + " ";
+ }
+}
+document.getElementById('text1').value= longtext
+}
+
+</script>
+</body>
+</html>
